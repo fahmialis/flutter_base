@@ -10,6 +10,8 @@ class ThirdScreen extends StatefulWidget {
 class ThirdScreenState extends State<ThirdScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return const Center(
+      child: Text('2k screen'),
+    );
   }
 }
