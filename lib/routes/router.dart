@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:roll_dice/screens/counter/counter_screen.dart';
-import 'package:roll_dice/screens/third_screen/third_screen.dart';
+import 'package:roll_dice/screens/second/second_screen.dart';
 import 'package:roll_dice/widgets/scaffold.dart';
 
 final globalNavigatorKey = GlobalKey<NavigatorState>();
@@ -27,7 +27,7 @@ class MainRouter {
         GoRoute(
             path: '/second',
             builder: (context, state) => const MainWrapper(
-                  child: ThirdScreen(),
+                  child: SecondScreen(),
                 )),
       ]);
 }
