@@ -10,10 +10,12 @@ class CounterScreen extends StatefulWidget {
 
 class _CounterScreenState extends State<CounterScreen> {
   int _counter = 0;
+  List<String> temp = [];
 
   void _incrementCounter() {
     setState(() {
       _counter++;
+      temp.add('value $_counter');
     });
   }
 
@@ -26,6 +28,7 @@ class _CounterScreenState extends State<CounterScreen> {
           children: <Widget>[
             const Text(
               'You have pushed the button this many times:',
+              style: TextStyle(color: Colors.blue),
             ),
             Text(
               '$_counter',

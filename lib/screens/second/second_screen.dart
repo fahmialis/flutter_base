@@ -8,10 +8,13 @@ class SecondScreen extends StatefulWidget {
 }
 
 class SecondScreenState extends State<SecondScreen> {
+  // Intentionally accessing a property that doesn't exist to trigger an error
+  String? text;
+
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('2k screen'),
+    return Center(
+      child: Text(text!.toUpperCase()),
     );
   }
 }
