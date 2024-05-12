@@ -15,7 +15,7 @@ class HomeScreenState extends State<HomeScreen> {
       debugShowCheckedModeBanner: false,
       title: 'testApp',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
         useMaterial3: true,
       ),
       routerConfig: MainRouter.router,
