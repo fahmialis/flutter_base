@@ -14,8 +14,11 @@ class ExpenseScreen extends StatefulWidget {
 class _ExpenseScreenState extends State<ExpenseScreen> {
   List<ExpenseEntity> expenses = [
     ExpenseEntity(
-        title: 'test', amount: 123, date: DateTime.now(), note: 'with note'),
-    ExpenseEntity(title: 'test2', amount: 1234, date: DateTime.now()),
+        title: 'expense 1',
+        amount: 5000,
+        date: DateTime.now(),
+        note: 'with note'),
+    ExpenseEntity(title: 'expense 2', amount: 10000, date: DateTime.now()),
   ];
 
   void addExpense(ExpenseEntity newExpense) {
