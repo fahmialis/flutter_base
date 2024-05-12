@@ -95,7 +95,9 @@ Future<dynamic> openModalExpense(
                           InkWell(
                             onTap: () {
                               addExpense(ExpenseEntity(
-                                  amount: double.parse(amountController.text),
+                                  amount: amountController.text.isNotEmpty
+                                      ? double.parse(amountController.text)
+                                      : 0,
                                   title: titleController.text,
                                   date: selectedDate ?? DateTime.now(),
                                   note: noteController.text));
