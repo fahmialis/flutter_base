@@ -51,8 +51,8 @@ class MainWrapperState extends State<MainWrapper> {
         },
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.one_k),
-            label: 'first',
+            icon: Icon(Icons.payment),
+            label: 'Expenses',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.two_k),

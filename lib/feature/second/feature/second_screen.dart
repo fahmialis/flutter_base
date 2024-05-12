@@ -9,7 +9,7 @@ class SecondScreen extends StatefulWidget {
 
 class SecondScreenState extends State<SecondScreen> {
   // Intentionally accessing a property that doesn't exist to trigger an error
-  String? text;
+  String? text = 'second page';
 
   @override
   Widget build(BuildContext context) {

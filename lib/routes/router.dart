@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:roll_dice/screens/counter/counter_screen.dart';
-import 'package:roll_dice/screens/second/second_screen.dart';
+import 'package:roll_dice/feature/expenses/feature/expense_screen.dart';
+import 'package:roll_dice/feature/second/feature/second_screen.dart';
 import 'package:roll_dice/widgets/scaffold.dart';
 
 final globalNavigatorKey = GlobalKey<NavigatorState>();
@@ -20,7 +20,7 @@ class MainRouter {
         GoRoute(
             path: '/',
             builder: (context, state) => const MainWrapper(
-                  child: CounterScreen(
+                  child: ExpenseScreen(
                     title: 'main screeen',
                   ),
                 )),
