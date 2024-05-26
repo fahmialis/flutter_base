@@ -23,7 +23,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
         title: 'expense 2',
         amount: 10000,
         date: DateTime.now(),
-        category: Category.work),
+        category: Category.leisure),
   ];
 
   void addExpense(Expense newExpense) {
@@ -62,6 +62,8 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
 
   @override
   Widget build(BuildContext context) {
+    bool isPotrait = MediaQuery.of(context).orientation == Orientation.portrait;
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.red[50],
@@ -72,29 +74,55 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
         child: const Icon(Icons.add),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Chart(expenses: expensesList),
-            const SizedBox(
-              height: 8,
-            ),
-            ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: expensesList.length,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return Dismissible(
-                    key: Key(expensesList[index].date.toString()),
-                    onDismissed: (direction) {
-                      deleteExpense(expensesList[index]);
+        child: isPotrait == true
+            ? Column(
+                children: [
+                  Chart(expenses: expensesList),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: expensesList.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return Dismissible(
+                          key: Key(expensesList[index].date.toString()),
+                          onDismissed: (direction) {
+                            deleteExpense(expensesList[index]);
+                          },
+                          child: ExpenseCard(
+                            expense: expensesList[index],
+                          ));
                     },
-                    child: ExpenseCard(
-                      expense: expensesList[index],
-                    ));
-              },
-            )
-          ],
-        ),
+                  )
+                ],
+              )
+            : Row(
+                children: [
+                  Expanded(child: Chart(expenses: expensesList)),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: expensesList.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return Dismissible(
+                            key: Key(expensesList[index].date.toString()),
+                            onDismissed: (direction) {
+                              deleteExpense(expensesList[index]);
+                            },
+                            child: ExpenseCard(
+                              expense: expensesList[index],
+                            ));
+                      },
+                    ),
+                  )
+                ],
+              ),
       ),
     );
   }
