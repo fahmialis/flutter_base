@@ -4,11 +4,9 @@ import 'package:roll_dice/feature/expenses/data/entities/expense_entitites.dart'
 import 'package:roll_dice/helpers/currency.dart';
 
 class ExpenseCard extends StatelessWidget {
-  const ExpenseCard({
-    super.key,
-    required this.expense,
-  });
+  const ExpenseCard({super.key, required this.expense, this.text});
 
+  final String? text;
   final ExpenseEntity expense;
 
   @override
@@ -31,20 +29,36 @@ class ExpenseCard extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Text(DateFormat("dd MMM yyyy").format(expense.date)),
+                      Text(
+                        DateFormat("dd MMM yyyy").format(expense.date),
+                        style: const TextStyle(color: Colors.black),
+                      ),
                       const SizedBox(
                         width: 16,
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(expense.title),
-                          Text(expense.note ?? ''),
+                          Text(
+                            expense.title,
+                            style: const TextStyle(color: Colors.black),
+                          ),
+                          Text(
+                            expense.note ?? '',
+                            style: const TextStyle(color: Colors.black),
+                          ),
                         ],
                       ),
                     ],
                   ),
-                  Text(CurrencyFormat.convertToIdr(expense.amount, 0)),
+                  Text(
+                    CurrencyFormat.convertToIdr(expense.amount, 0),
+                    style: const TextStyle(color: Colors.black),
+                  ),
+                  Text(
+                    text ?? '',
+                    style: const TextStyle(color: Colors.black),
+                  ),
                 ],
               )),
         ],

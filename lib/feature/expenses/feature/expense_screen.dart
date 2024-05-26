@@ -60,6 +60,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.red[50],
+        foregroundColor: Colors.black,
         onPressed: () {
           openModalExpense(context, addExpense);
         },
@@ -78,7 +79,9 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                     onDismissed: (direction) {
                       deleteExpense(expenses[index]);
                     },
-                    child: ExpenseCard(expense: expenses[index]));
+                    child: ExpenseCard(
+                      expense: expenses[index],
+                    ));
               },
             )
           ],
