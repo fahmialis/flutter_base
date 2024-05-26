@@ -65,7 +65,6 @@ class HomeScreenState extends State<HomeScreen> {
               ),
             ),
       ),
-      themeMode: ThemeMode.dark,
       routerConfig: MainRouter.router,
     );
   }
