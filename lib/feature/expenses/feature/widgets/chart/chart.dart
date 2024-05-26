@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:roll_dice/feature/expenses/data/entities/expense_entitites.dart';
 import 'package:roll_dice/feature/expenses/feature/widgets/chart/chart_bar.dart';
-import 'package:roll_dice/helpers/currency.dart';
 
 class Chart extends StatelessWidget {
   const Chart({super.key, required this.expenses});
