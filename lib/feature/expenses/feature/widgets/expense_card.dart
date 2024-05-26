@@ -7,7 +7,7 @@ class ExpenseCard extends StatelessWidget {
   const ExpenseCard({super.key, required this.expense, this.text});
 
   final String? text;
-  final ExpenseEntity expense;
+  final Expense expense;
 
   @override
   Widget build(BuildContext context) {
@@ -43,10 +43,6 @@ class ExpenseCard extends StatelessWidget {
                             expense.title,
                             style: const TextStyle(color: Colors.black),
                           ),
-                          Text(
-                            expense.note ?? '',
-                            style: const TextStyle(color: Colors.black),
-                          ),
                         ],
                       ),
                     ],
@@ -55,10 +51,7 @@ class ExpenseCard extends StatelessWidget {
                     CurrencyFormat.convertToIdr(expense.amount, 0),
                     style: const TextStyle(color: Colors.black),
                   ),
-                  Text(
-                    text ?? '',
-                    style: const TextStyle(color: Colors.black),
-                  ),
+                  Icon(categoryIcons[expense.category]),
                 ],
               )),
         ],

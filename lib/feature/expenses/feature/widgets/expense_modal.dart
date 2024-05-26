@@ -4,13 +4,14 @@ import 'package:intl/intl.dart';
 import 'package:roll_dice/feature/expenses/data/entities/expense_entitites.dart';
 
 Future<dynamic> openModalExpense(
-    BuildContext context, Function(ExpenseEntity newExpense) addExpense) {
+    BuildContext context, Function(Expense newExpense) addExpense) {
   final titleController = TextEditingController();
   final noteController = TextEditingController();
   final amountController = TextEditingController();
   final now = DateTime.now();
   final firstDate = DateTime(now.year - 1, now.month, now.day);
   DateTime? selectedDate;
+  Category _selectedCategory = Category.leisure;
 
   return showModalBottomSheet(
       context: context,
@@ -84,6 +85,38 @@ Future<dynamic> openModalExpense(
                         height: 16,
                       ),
                       Row(
+                        children: [
+                          DropdownButton(
+                            value: _selectedCategory,
+                            items: Category.values
+                                .map(
+                                  (category) => DropdownMenuItem(
+                                    value: category,
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          category.name.toUpperCase(),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                )
+                                .toList(),
+                            onChanged: (value) {
+                              if (value == null) {
+                                return;
+                              }
+                              modalState(() {
+                                _selectedCategory = value;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           InkWell(
@@ -94,13 +127,13 @@ Future<dynamic> openModalExpense(
                           ),
                           InkWell(
                             onTap: () {
-                              addExpense(ExpenseEntity(
+                              addExpense(Expense(
                                   amount: amountController.text.isNotEmpty
                                       ? double.parse(amountController.text)
                                       : 0,
                                   title: titleController.text,
                                   date: selectedDate ?? DateTime.now(),
-                                  note: noteController.text));
+                                  category: _selectedCategory));
                               context.pop();
                             },
                             child: const Chip(label: Text('Save')),

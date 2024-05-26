@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:roll_dice/feature/expenses/data/entities/expense_entitites.dart';
+import 'package:roll_dice/feature/expenses/feature/widgets/chart/chart.dart';
 import 'package:roll_dice/feature/expenses/feature/widgets/expense_card.dart';
 import 'package:roll_dice/feature/expenses/feature/widgets/expense_modal.dart';
 
@@ -12,22 +13,26 @@ class ExpenseScreen extends StatefulWidget {
 }
 
 class _ExpenseScreenState extends State<ExpenseScreen> {
-  List<ExpenseEntity> expenses = [
-    ExpenseEntity(
+  List<Expense> expensesList = [
+    Expense(
         title: 'expense 1',
         amount: 5000,
         date: DateTime.now(),
-        note: 'with note'),
-    ExpenseEntity(title: 'expense 2', amount: 10000, date: DateTime.now()),
+        category: Category.work),
+    Expense(
+        title: 'expense 2',
+        amount: 10000,
+        date: DateTime.now(),
+        category: Category.work),
   ];
 
-  void addExpense(ExpenseEntity newExpense) {
+  void addExpense(Expense newExpense) {
     setState(() {
-      expenses.add(ExpenseEntity(
+      expensesList.add(Expense(
           title: newExpense.title,
           amount: newExpense.amount,
           date: newExpense.date,
-          note: newExpense.note ?? ''));
+          category: Category.food));
     });
 
     ScaffoldMessenger.of(context).clearSnackBars();
@@ -35,10 +40,10 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
         .showSnackBar(const SnackBar(content: Text('New expense added')));
   }
 
-  void deleteExpense(ExpenseEntity removedExpense) {
-    final expenseIndex = expenses.indexOf(removedExpense);
+  void deleteExpense(Expense removedExpense) {
+    final expenseIndex = expensesList.indexOf(removedExpense);
     setState(() {
-      expenses.remove(removedExpense);
+      expensesList.remove(removedExpense);
     });
 
     ScaffoldMessenger.of(context).clearSnackBars();
@@ -49,7 +54,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
           label: 'Undo',
           onPressed: () {
             setState(() {
-              expenses.insert(expenseIndex, removedExpense);
+              expensesList.insert(expenseIndex, removedExpense);
             });
           }),
     ));
@@ -69,18 +74,22 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            Chart(expenses: expensesList),
+            const SizedBox(
+              height: 8,
+            ),
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: expenses.length,
+              itemCount: expensesList.length,
               shrinkWrap: true,
               itemBuilder: (context, index) {
                 return Dismissible(
-                    key: Key(expenses[index].date.toString()),
+                    key: Key(expensesList[index].date.toString()),
                     onDismissed: (direction) {
-                      deleteExpense(expenses[index]);
+                      deleteExpense(expensesList[index]);
                     },
                     child: ExpenseCard(
-                      expense: expenses[index],
+                      expense: expensesList[index],
                     ));
               },
             )
